@@ -31,7 +31,7 @@ RUN yum install -y MonetDB-R
 RUN yum -y clean all
 
 #######################################################
-# Setup monetdbd service and supervisord
+# Setup supervisord
 #######################################################
 # Create a log dir for the supervisor
 RUN mkdir -p /var/log/supervisor
@@ -39,15 +39,17 @@ RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 #######################################################
-# Setup MonetDB and the MonetDBd service
+# Setup MonetDB
 #######################################################
-# Create a new dbfarm
-RUN rm -rf /var/monetdb5/dbfarm && \
-    monetdbd create /var/monetdb5/dbfarm && \
-    monetdbd start /var/monetdb5/dbfarm && \
-    monetdb create db && \
-    monetdb set embedr=true db && \
-    monetdbd stop /var/monetdb5/dbfarm
+# Create a new database
+RUN mkdir -p /var/monetdb5/db
+# Create a .monetdb file s.t. users of the container can more easily login (with the default credentials)
+RUN echo -e "user=monetdb\npassword=monetdb" > .monetdb
+
+#######################################################
+# Expose ports
+#######################################################
+EXPOSE 50000
 
 #######################################################
 # Startup scripts
@@ -56,12 +58,4 @@ COPY start-monetdb.sh start-monetdb.sh
 COPY set-monetdb-password.sh set-monetdb-password.sh
 RUN chmod +x start-monetdb.sh && \
     chmod +x set-monetdb-password.sh
-#ENTRYPOINT ["/start-monetdb.sh"]
-CMD ["/usr/bin/supervisord"]
-#CMD ["/start-monetdb.sh"]
-#CMD ["monetdbd start -n /var/monetdb5/dbfarm"]
-
-#######################################################
-# Expose ports
-#######################################################
-EXPOSE 50000
+CMD ["/usr/bin/supervisord", "-n"]
