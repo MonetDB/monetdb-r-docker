@@ -10,27 +10,31 @@ To build the image run
 docker build --rm -t <yourname>/monetdb-docker .
 ```
 
-# Launching MonetDB
+# Launching a MonetDB container
+```bash
+docker run -d -P <yourname>/monetdb-docker
+```
+The `-d` option will send the docker process to the background. The `-P` option will "publish" all exposed ports.
+
 ## Quick start
 ```bash
-docker run --rm <yourname>/monetdb-docker
+docker exec -d <container-id> /root/start-monetdb.sh
 ```
-You can then access MonetDB on the default port 50000, with the default username/password: monetdb/monetdb.
+After that, you should be able to access MonetDB on the default port 50000, with the default username/password: monetdb/monetdb.
+Or you can run `docker exec -it <container-id> mclient db` to open an `mclient` shell in the container.
 
 ## Production run
-You can create a new database and set the password for the admin user `monetdb`, by setting `DBNAME` and `PASSWORD` variables.
-You may also simply set a new admin password for the default database `db`, if you do not want to create a new one.
-
+Before letting other users use the database-in-container, you should create a new database and set the password for the admin user `monetdb`:
 ```bash
-docker run --rm -e 'PASSWORD=password' -e 'DBNAME=my_database' <yourname>/monetdb-docker
+docker exec -d <container-id> /root/setup-monetdb.sh <dbname> <password>
+```
+Or should at least set a new admin password:
+```bash
+docker exec -d <container-id> /root/setup-monetdb.sh <password>
 ```
 
-# Connecting to MonetDB
-To connect to the database:
-```bash
-mclient -d <database> -u monetdb
-```
-Omitted here are the default port (50000) and host (localhost).
+After that, you should be able to access MonetDB on the default port 50000, with the default username/password: monetdb/monetdb.
+Or you can run `docker exec -it <container-id> mclient db` to open an `mclient` shell in the container.
 
 # Details
 ## Base image
@@ -44,4 +48,4 @@ The image includes the latest stable version (at the time of image generation) o
 The default database on the image, as well as databases created with the startup script, have R integration enabled.
 
 ## Ports
-MonetDB runs on port 50000 by default, which is open on the image.
+MonetDB runs on port 50000 by default, which is exposed on the image.

@@ -14,6 +14,10 @@ fi
 
 if [ -n "$3" ]; then
     password=$3
+    echo "Setting new password for database '$dbname' and user '$username'."
+    echo -e "user=monetdb\npassword=monetdb" > .monetdb
     mclient $dbname -s "ALTER USER SET PASSWORD '$password' USING OLD PASSWORD 'monetdb'";
-    echo -e "user=monetdb\npassword=$password" > .monetdb
+    rm -f .monetdb
+else
+    echo "No password provided, aborting."
 fi

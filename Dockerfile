@@ -43,8 +43,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #######################################################
 # Create a new database
 RUN mkdir -p /var/monetdb5/db
-# Create a .monetdb file s.t. users of the container can more easily login (with the default credentials)
-RUN echo -e "user=monetdb\npassword=monetdb" > .monetdb
 
 #######################################################
 # Expose ports
@@ -54,8 +52,10 @@ EXPOSE 50000
 #######################################################
 # Startup scripts
 #######################################################
-COPY start-monetdb.sh start-monetdb.sh
-COPY set-monetdb-password.sh set-monetdb-password.sh
-RUN chmod +x start-monetdb.sh && \
-    chmod +x set-monetdb-password.sh
+COPY start-monetdb.sh /root/start-monetdb.sh
+COPY setup-monetdb.sh /root/setup-monetdb.sh
+COPY set-monetdb-password.sh /root/set-monetdb-password.sh
+RUN chmod +x /root/setup-monetdb.sh && \
+    chmod +x /root/start-monetdb.sh && \
+    chmod +x /root/set-monetdb-password.sh
 CMD ["/usr/bin/supervisord", "-n"]
