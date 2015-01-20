@@ -1,16 +1,14 @@
 ############################################################
 # Dockerfile to build MonetDB container images
-# Based on CentOS 7
+# Based on Fedora (latest)
 ############################################################
 
-FROM fedora
+FROM fedora:latest
 MAINTAINER Dimitar Nedev, dimitar.nedev@monetdbsolutions.com
 
 #############################################################
 # Enables repos, update system, install packages and clean up
 #############################################################
-# Enable EPEL repo
-# RUN yum install -y epel-release
 # Enable MonetDB repo
 RUN yum install -y https://dev.monetdb.org/downloads/Fedora/MonetDB-release-1.1-1.monetdb.noarch.rpm
 # Update & upgrade
@@ -36,14 +34,24 @@ RUN yum -y clean all
 # Create a log dir for the supervisor
 RUN mkdir -p /var/log/supervisor
 # Copy the config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.ini /etc/supervisord.d/supervisord.ini
 
 #######################################################
 # Setup MonetDB
 #######################################################
-# Create a new database
-RUN mkdir -p /var/monetdb5/db
-RUN touch /var/monetdb5/db/monetdb.log
+# Start the dbfarm, create a new database, enable R integration and release it
+RUN monetdbd start /var/monetdb5/dbfarm && \
+    monetdb create db && \
+    monetdb set embedr=true db && \
+    monetdb start db && \
+    monetdb release db && \
+    monetdb stop db
+
+#######################################################
+# Helper scripts
+#######################################################
+COPY set-monetdb-password.sh /root/set-monetdb-password.sh
+RUN chmod +x /root/set-monetdb-password.sh
 
 #######################################################
 # Expose ports
@@ -53,12 +61,4 @@ EXPOSE 50000
 #######################################################
 # Startup scripts
 #######################################################
-COPY start-monetdb.sh /root/start-monetdb.sh
-COPY setup-monetdb.sh /root/setup-monetdb.sh
-COPY set-monetdb-password.sh /root/set-monetdb-password.sh
-RUN chmod +x /root/setup-monetdb.sh && \
-    chmod +x /root/start-monetdb.sh && \
-    chmod +x /root/set-monetdb-password.sh
-#CMD ["/usr/bin/supervisord", "-n"]
-#CMD ["/root/start-monetdb.sh"]
-CMD ["mserver5", "--dbpath=/var/monetdb5/db", "--daemon=yes", "--set", "embedded_r=true"]
+CMD ["/usr/bin/supervisord", "-n"]
