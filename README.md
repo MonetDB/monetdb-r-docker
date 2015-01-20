@@ -5,14 +5,19 @@ Based on CentOS 7*
 
 # Setup
 
+Pull the image from the registry
+```bash
+docker build --rm -t monetdb/docker-monetdb .
+```
+
 To build the image run
 ```bash
-docker build --rm -t <yourname>/monetdb-docker .
+docker build --rm -t docker-monetdb .
 ```
 
 # Launching a MonetDB container
 ```bash
-docker run -d -P <yourname>/monetdb-docker
+docker run -d -P docker-monetdb
 ```
 The `-d` option will send the docker process to the background. The `-P` option will "publish" all exposed ports.
 

@@ -3,16 +3,16 @@
 # Based on CentOS 7
 ############################################################
 
-FROM milcom/centos7-systemd
+FROM fedora
 MAINTAINER Dimitar Nedev, dimitar.nedev@monetdbsolutions.com
 
 #############################################################
 # Enables repos, update system, install packages and clean up
 #############################################################
 # Enable EPEL repo
-RUN yum install -y epel-release
+# RUN yum install -y epel-release
 # Enable MonetDB repo
-RUN yum install -y https://dev.monetdb.org/downloads/epel/MonetDB-release-epel-1.1-1.monetdb.noarch.rpm
+RUN yum install -y https://dev.monetdb.org/downloads/Fedora/MonetDB-release-1.1-1.monetdb.noarch.rpm
 # Update & upgrade
 RUN yum update -y && \
     yum upgrade -y
@@ -43,6 +43,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #######################################################
 # Create a new database
 RUN mkdir -p /var/monetdb5/db
+RUN touch /var/monetdb5/db/monetdb.log
 
 #######################################################
 # Expose ports
@@ -58,4 +59,6 @@ COPY set-monetdb-password.sh /root/set-monetdb-password.sh
 RUN chmod +x /root/setup-monetdb.sh && \
     chmod +x /root/start-monetdb.sh && \
     chmod +x /root/set-monetdb-password.sh
-CMD ["/usr/bin/supervisord", "-n"]
+#CMD ["/usr/bin/supervisord", "-n"]
+#CMD ["/root/start-monetdb.sh"]
+CMD ["mserver5", "--dbpath=/var/monetdb5/db", "--daemon=yes", "--set", "embedded_r=true"]
