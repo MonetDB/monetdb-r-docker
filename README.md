@@ -1,18 +1,18 @@
-monetdb-docker
+monetdb-r-docker
 ===========================
 Dockerfile for [MonetDB with R integration](https://www.monetdb.org/content/embedded-r-monetdb)
 
-Based on Fedora
+Based on Fedora (latest)
 
 # Launching a MonetDB container
 Pull the image from the registry:
 ```bash
-docker pull monetdb/docker-monetdb .
+docker pull monetdb/monetdb-r-docker .
 ```
 
 ## Quick start
 ```bash
-docker run -d -P docker-monetdb
+docker run -d -P monetdb-r-docker
 ```
 The `-d` option will send the docker process to the background. The `-P` option will "publish" all exposed ports.
 
@@ -27,17 +27,17 @@ docker exec -d <container-id> /root/set-monetdb-password.sh <password>
 ```
 
 # Advanced
+## Multiple database servers per container
+The MonetDB daemon [monetdbd](https://www.monetdb.org/Documentation/monetdbd-man-page) allows for multiple MonetDB database server processes to run on the same system and listed on the same port. While it is not advised not run more than one database server in the same Docker container, you can do that by creating a new database with the [monetdb](https://www.monetdb.org/Documentation/monetdb-man-page) command-line control tool.
+
+For more information on how to use MonetDB, check out the [tutorial](https://www.monetdb.org/Documentation/UserGuide/Tutorial).
+
 ## Build your own
 You can use the image as a base image when building your own version.
 After pulling the image from the registry run the command bellow to build and tag your own version.
 ```bash
 docker build --rm -t <yourname>/docker-monetdb .
 ```
-
-## Multiple database servers per container
-The MonetDB daemon [monetdbd](https://www.monetdb.org/Documentation/monetdbd-man-page) allows for multiple MonetDB database server processes to run on the same system and listed on the same port. While it is not advised not run more than one database server in the same Docker container, you can do that by creating a new database with the [monetdb](https://www.monetdb.org/Documentation/monetdb-man-page) command-line control tool.
-
-For more information on how to use MonetDB, check out the [tutorial](https://www.monetdb.org/Documentation/UserGuide/Tutorial).
 
 # Details
 ## Base image
