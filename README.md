@@ -28,7 +28,7 @@ docker exec -d <container-id> /root/set-monetdb-password.sh <password>
 
 # Advanced
 ## Multiple database servers per container
-The MonetDB daemon [monetdbd](https://www.monetdb.org/Documentation/monetdbd-man-page) allows for multiple MonetDB database server processes to run on the same system and listed on the same port. While it is not advised not run more than one database server in the same Docker container, you can do that by creating a new database with the [monetdb](https://www.monetdb.org/Documentation/monetdb-man-page) command-line control tool.
+The MonetDB daemon [monetdbd](https://www.monetdb.org/Documentation/monetdbd-man-page) allows for multiple MonetDB database server processes to run on the same system and listed on the same port. While it is not advised to run more than one database server in the same Docker container, you can do that by creating a new database with the [monetdb](https://www.monetdb.org/Documentation/monetdb-man-page) command-line control tool.
 
 For more information on how to use MonetDB, check out the [tutorial](https://www.monetdb.org/Documentation/UserGuide/Tutorial).
 
@@ -36,12 +36,12 @@ For more information on how to use MonetDB, check out the [tutorial](https://www
 You can use the image as a base image when building your own version.
 After pulling the image from the registry run the command bellow to build and tag your own version.
 ```bash
-docker build --rm -t <yourname>/docker-monetdb .
+docker build --rm -t <yourname>/monetdb-r-docker .
 ```
 
 # Details
 ## Base image
-The MonetDB image is based on the lastest Fedora (at the time of image generation).
+The MonetDB image is based on the latest Fedora (at the time of image generation). There are plans to migrate to CentOS (latest) once certain system.d issue is resovled
 ## Software
 The image includes the latest stable version (at the time of image generation, again) of:
 * MonetDB
