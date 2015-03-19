@@ -6,7 +6,7 @@ Based on Fedora (latest)
 
 # Launching a MonetDB container
 Pull the image from the registry:
-```bash
+```
 docker pull monetdb/monetdb-r-docker .
 ```
 
