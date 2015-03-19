@@ -14,7 +14,7 @@ docker pull monetdb/monetdb-r-docker .
 ```bash
 docker run -d -P monetdb-r-docker
 ```
-The `-d` option will send the docker process to the background. The `-P` option will "publish" all exposed ports.
+The `-d` option will send the docker process to the background. The `-P` option will publish all exposed ports.
 
 After that, you should be able to access MonetDB on the default port `50000`, with the default username/password: `monetdb/monetdb`.
 
