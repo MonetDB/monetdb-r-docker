@@ -34,7 +34,7 @@ For more information on how to use MonetDB, check out the [tutorial](https://www
 
 ## Build your own
 You can use the image as a base image when building your own version.
-After pulling the image from the registry run the command bellow to build and tag your own version.
+After pulling the image from the registry, run the command bellow to build and tag your own version.
 ```bash
 docker build --rm -t <yourname>/monetdb-r-docker .
 ```
