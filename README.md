@@ -11,7 +11,7 @@ docker pull monetdb/monetdb-r-docker .
 ```
 
 ## Quick start
-```bash
+```
 docker run -d -P monetdb-r-docker
 ```
 The `-d` option will send the docker process to the background. The `-P` option will publish all exposed ports.
@@ -22,7 +22,7 @@ Or you can run `docker exec -it <container-id> mclient db` to open an [`mclient`
 
 ## Production run
 Before letting other users access the database-in-container, you should set a new password for the admin user `monetdb`:
-```bash
+```
 docker exec -d <container-id> /root/set-monetdb-password.sh <password>
 ```
 
@@ -35,7 +35,7 @@ For more information on how to use MonetDB, check out the [tutorial](https://www
 ## Build your own
 You can use the image as a base image when building your own version.
 After pulling the image from the registry, run the command bellow to build and tag your own version.
-```bash
+```
 docker build --rm -t <yourname>/monetdb-r-docker .
 ```
 
