@@ -1,6 +1,6 @@
 monetdb-r-docker
 ===========================
-Dockerfile for [MonetDB with R integration](https://www.monetdb.org/content/embedded-r-monetdb)
+Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb)
 
 Based on Fedora (latest)
 
