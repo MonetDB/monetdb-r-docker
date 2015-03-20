@@ -8,24 +8,24 @@ Based on Fedora (latest)
 Pull the image from the registry:
 
 ```
-docker pull monetdb/monetdb-r-docker .
+docker pull monetdb/monetdb-r-docker
 ```
 
 ## Quick start
 ```
-docker run -d -P monetdb-r-docker
+docker run -d -P --name monetdb-r monetdb-r-docker
 ```
 The `-d` option will send the docker process to the background. The `-P` option will publish all exposed ports.
 
 After that, you should be able to access MonetDB on the default port `50000`, with the default username/password: `monetdb/monetdb`.
 
-Or you can run `docker exec -it <container-id> mclient db` to open an [`mclient`](https://www.monetdb.org/Documentation/mclient-man-page) shell in the container.
+Or you can run `docker exec -it monetdb-r mclient db` to open an [`mclient`](https://www.monetdb.org/Documentation/mclient-man-page) shell in the container.
 
 ## Production run
 Before letting other users access the database-in-container, you should set a new password for the admin user `monetdb`:
 
 ```
-docker exec -d <container-id> /root/set-monetdb-password.sh <password>
+docker exec -d monetdb-r /root/set-monetdb-password.sh <password>
 ```
 
 # Advanced
@@ -52,7 +52,7 @@ The image includes the latest stable version (at the time of image generation, a
 * R integration module
 * R
 
-The default database on the image have R integration enabled.
+The default database on the image has R integration enabled.
 
 ## Ports
 MonetDB runs on port `50000` by default, which is exposed on the image.
