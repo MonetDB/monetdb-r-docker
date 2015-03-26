@@ -13,7 +13,7 @@ docker pull monetdb/monetdb-r-docker
 
 ## Quick start
 ```
-docker run -d -P --name monetdb-r monetdb-r-docker
+docker run -d -P --name monetdb-r monetdb/monetdb-r-docker
 ```
 The `-d` option will send the docker process to the background. The `-P` option will publish all exposed ports.
 
