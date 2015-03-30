@@ -22,7 +22,7 @@ RUN yum install -y supervisor
 RUN yum install -y MonetDB-SQL-server5 MonetDB-client
 # Install the MonetDB/GEOM module
 RUN yum install -y MonetDB-geom-MonetDB5
-# Install MonetDB/R and R (as dependency)
+# Install MonetDB/R and R (as a dependency)
 RUN yum install -y MonetDB-R
 
 # Clean up
