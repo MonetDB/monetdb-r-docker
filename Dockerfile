@@ -39,6 +39,8 @@ COPY supervisord.ini /etc/supervisord.d/supervisord.ini
 #######################################################
 # Setup MonetDB
 #######################################################
+# Setup using the monetdb user
+USER monetdb
 # Start the dbfarm, create a new database, enable R integration and release it
 RUN monetdbd start /var/monetdb5/dbfarm && \
     monetdb create db && \
@@ -50,8 +52,10 @@ RUN monetdbd start /var/monetdb5/dbfarm && \
 #######################################################
 # Helper scripts
 #######################################################
-COPY set-monetdb-password.sh /root/set-monetdb-password.sh
-RUN chmod +x /root/set-monetdb-password.sh
+COPY set-monetdb-password.sh /home/monetdb/set-monetdb-password.sh
+# Switch back to root for the rest
+USER root
+RUN chmod +x /home/monetdb/set-monetdb-password.sh
 
 #######################################################
 # Expose ports
