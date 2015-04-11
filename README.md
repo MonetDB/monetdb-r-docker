@@ -4,6 +4,8 @@ Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r
 
 Based on Fedora (latest)
 
+![docker-badge](http://dockeri.co/image/monetdb/monetdb-r-docker)
+
 # Launching a MonetDB container
 Pull the image from the registry:
 
