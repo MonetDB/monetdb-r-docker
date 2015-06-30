@@ -46,7 +46,7 @@ docker build --rm -t <yourname>/monetdb-r-docker .
 
 # Details
 ## Base image
-The MonetDB image is based on the latest Fedora (at the time of image generation). There are plans to migrate to CentOS (latest) once certain system.d issue is resovled
+The MonetDB image is based on the latest Fedora (at the time of image generation). There are plans to migrate to CentOS (latest) once certain system.d issue is resolved
 ## Software
 The image includes the latest stable version (at the time of image generation, again) of:
 * MonetDB
