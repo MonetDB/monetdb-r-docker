@@ -4,7 +4,7 @@ Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r
 
 Based on CentOS 7
 
-![docker-badge](http://dockeri.co/image/monetdb/monetdb-r-docker)
+[![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg)](https://hub.docker.com/r/monetdb/monetdb-r-docker/)
 
 # Launching a MonetDB container
 Pull the image from the registry:
