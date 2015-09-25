@@ -2,7 +2,7 @@ monetdb-r-docker
 ===========================
 Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb)
 
-Based on Fedora (latest)
+Based on CentOS 7
 
 ![docker-badge](http://dockeri.co/image/monetdb/monetdb-r-docker)
 
@@ -46,13 +46,14 @@ docker build --rm -t <yourname>/monetdb-r-docker .
 
 # Details
 ## Base image
-The MonetDB image is based on the latest Fedora (at the time of image generation). There are plans to migrate to CentOS (latest) once certain system.d issue is resolved
+The MonetDB image is based on the CentOS 7. We migrated from Fedora (latest).
 ## Software
-The image includes the latest stable version (at the time of image generation, again) of:
+The image includes the latest stable version (July2015 or 11.21.5) of:
 * MonetDB
+* R module for embedded R support
+ * R
 * GEOS module
-* R integration module
-* R
+* GSL module
 
 The default database on the image has R integration enabled.
 
