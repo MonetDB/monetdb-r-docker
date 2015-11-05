@@ -50,7 +50,7 @@ RUN yum update -y && \
     yum upgrade -y
 
 # Install MonetDB
-RUN yum install -y MonetDB-SQL-server5-hugeint-11.21.5
+RUN yum install -y MonetDB-SQL-server5-hugeint-11.21.11
 RUN yum install -y MonetDB-client
 # Install the MonetDB/GEOM module
 RUN yum install -y MonetDB-geom-MonetDB5
