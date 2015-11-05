@@ -1,10 +1,12 @@
 monetdb-r-docker
 ===========================
-Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb)
-
-Based on CentOS 7
-
 [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg)](https://hub.docker.com/r/monetdb/monetdb-r-docker/)
+
+Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb). Based on CentOS 7.
+
+# Supported tags and respective Dockerfile links
+* [`July2015-SP1`, `11.21.11`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.11/Dockerfile)
+* [`July2015`, `11.21.5` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.5/Dockerfile)
 
 # Launching a MonetDB container
 Pull the image from the registry:
@@ -48,7 +50,7 @@ docker build --rm -t <yourname>/monetdb-r-docker .
 ## Base image
 The MonetDB image is based on the CentOS 7. We migrated from Fedora (latest).
 ## Software
-The image includes the latest stable version (July2015 or 11.21.5) of:
+The image includes the latest stable version of the software available for CentOS at build time:
 * MonetDB
 * R module for embedded R support
  * R
