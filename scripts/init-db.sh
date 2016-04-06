@@ -30,17 +30,17 @@ runuser -l  monetdb -c 'monetdb start db'
 
 for i in {30..0}; do
   echo 'Testing MonetDB connection ' $i
-	if test_monetdb_connection ; then
-		echo 'Waiting for MonetDB to start...'
-  	sleep 1
+  if test_monetdb_connection ; then
+      echo 'Waiting for MonetDB to start...'
+      sleep 1
   else
-    echo 'MonetDB is running'
-    break
-	fi
+      echo 'MonetDB is running'
+      break
+  fi
 done
 if [ "$i" = 0 ]; then
-	echo >&2 'MonetDB startup failed'
-	exit 1
+    echo >&2 'MonetDB startup failed'
+    exit 1
 fi
 
 mkdir -p /var/log/monetdb
