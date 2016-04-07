@@ -3,7 +3,7 @@
 # Based on CentOS 7
 ############################################################
 FROM centos:7
-MAINTAINER Dimitar Nedev, dimitar.nedev@monetdbsolutions.com
+MAINTAINER Panagiotis Koutsourakis, panagiotis.koutsourakis@monetdbsolutions.com
 
 #######################################################
 # Expose ports
@@ -50,7 +50,7 @@ RUN yum update -y && \
     yum upgrade -y
 
 # Install MonetDB
-RUN yum install -y MonetDB-SQL-server5-hugeint-11.21.11
+RUN yum install -y MonetDB-SQL-server5-hugeint-11.21.17
 RUN yum install -y MonetDB-client
 # Install the MonetDB/GEOM module
 RUN yum install -y MonetDB-geom-MonetDB5
@@ -65,7 +65,7 @@ RUN yum -y clean all
 #######################################################
 # Setup MonetDB
 #######################################################
-# Add helper scripts    
+# Add helper scripts
 COPY scripts/set-monetdb-password.sh /home/monetdb/set-monetdb-password.sh
 RUN chmod +x /home/monetdb/set-monetdb-password.sh
 
