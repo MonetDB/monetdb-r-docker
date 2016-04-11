@@ -3,7 +3,7 @@
 # Based on CentOS 7
 ############################################################
 FROM centos:7
-MAINTAINER Panagiotis Koutsourakis, panagiotis.koutsourakis@monetdbsolutions.com
+MAINTAINER Panagiotis Koutsourakis <panagiotis.koutsourakis@monetdbsolutions.com>
 
 #######################################################
 # Expose ports
@@ -44,13 +44,14 @@ RUN groupadd -g 5000 monetdb && \
 
 # Enable MonetDB repo
 RUN yum install -y http://dev.monetdb.org/downloads/epel/MonetDB-release-epel-1.1-1.monetdb.noarch.rpm
+RUN rpm --import http://dev.monetdb.org/downloads/MonetDB-GPG-KEY
+
 
 # Update & upgrade
-RUN yum update -y && \
-    yum upgrade -y
+RUN yum update -y
 
 # Install MonetDB
-RUN yum install -y MonetDB-SQL-server5-hugeint-11.21.17
+RUN yum install -y MonetDB-SQL-server5-hugeint
 RUN yum install -y MonetDB-client
 # Install the MonetDB/GEOM module
 RUN yum install -y MonetDB-geom-MonetDB5
@@ -77,15 +78,9 @@ COPY configs/.monetdb /home/monetdb/.monetdb
 COPY scripts/init-db.sh /home/monetdb/init-db.sh
 RUN chmod +x /home/monetdb/init-db.sh
 
-# Set the owner to monetdbs
-RUN chown -R monetdb:monetdb /home/monetdb
-
 # Init the db in a scipt to allow more than one process to run in the container
 # We need two: one for monetdbd and one for mserver
 # The sript will init the database with using the unpreveledged user monetdb
-RUN sh /home/monetdb/init-db.sh
+RUN su -c 'sh /home/monetdb/init-db.sh' monetdb
 
-#######################################################
-# Startup scripts
-#######################################################
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
