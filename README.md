@@ -5,7 +5,8 @@ monetdb-r-docker
 Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb). Based on CentOS 7.
 
 # Supported tags and respective Dockerfile links
-* [`July2015-SP3`, `11.21.17`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.17/Dockerfile)
+* [`July2015-SP4`, `11.21.19`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.19/Dockerfile)
+* [`July2015-SP3`, `11.21.17` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.17/Dockerfile)
 * [`July2015-SP1`, `11.21.11` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.11/Dockerfile)
 * [`July2015`, `11.21.5` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.5/Dockerfile)
 
