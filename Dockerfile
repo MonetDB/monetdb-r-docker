@@ -28,8 +28,8 @@ RUN yum install -y \
     wget \
     nano
 
-RUN wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
-RUN rpm -ivh epel-release-7-6.noarch.rpm
+RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN rpm -ivh epel-release-latest-7*.rpm
 
 # Update & upgrade
 RUN yum update -y && \
