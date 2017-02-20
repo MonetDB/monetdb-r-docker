@@ -24,12 +24,8 @@ COPY configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #############################################################
 # Enables repos, update system, install packages and clean up
 #############################################################
-RUN yum install -y \
-    wget \
-    nano
-
-RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN rpm -ivh epel-release-latest-7*.rpm
+RUN yum install -y epel-release \
+                   wget
 
 # Update & upgrade
 RUN yum update -y && \
@@ -43,22 +39,27 @@ RUN groupadd -g 5000 monetdb && \
     useradd -u 5000 -g 5000 monetdb
 
 # Enable MonetDB repo
-RUN yum install -y http://dev.monetdb.org/downloads/epel/MonetDB-release-epel-1.1-1.monetdb.noarch.rpm
-RUN rpm --import http://dev.monetdb.org/downloads/MonetDB-GPG-KEY
+RUN wget -O /etc/yum.repos.d/monetdb.repo https://dev.monetdb.org/downloads/epel/monetdb.repo
+RUN rpm --import https://dev.monetdb.org/downloads/MonetDB-GPG-KEY
 
+ARG MonetDBVersion=11.23.13
 
-# Update & upgrade
-RUN yum update -y
+# Install MonetDB clients
+RUN yum install -y MonetDB-stream-$MonetDBVersion \
+                   MonetDB-client-$MonetDBVersion \
+                   MonetDB-client-tools-$MonetDBVersion \
+                   MonetDB-client-odbc-$MonetDBVersion
 
-# Install MonetDB
-RUN yum install -y MonetDB-SQL-server5-hugeint
-RUN yum install -y MonetDB-client
-# Install the MonetDB/GEOM module
-RUN yum install -y MonetDB-geom-MonetDB5
-# Install MonetDB/R (R is installed as a dependency)
-RUN yum install -y MonetDB-R
-# Install MonetDB/GSL module
-RUN yum install -y MonetDB-gsl-MonetDB5
+# Install MonetDB server
+RUN yum install -y MonetDB-$MonetDBVersion \
+                   MonetDB-SQL-server5-hugeint-$MonetDBVersion
+
+# Install MonetDB extensions
+RUN yum install -y MonetDB-geom-MonetDB5-$MonetDBVersion \
+                   MonetDB-gsl-MonetDB5-$MonetDBVersion \
+                   MonetDB-R-$MonetDBVersion
+
+# RUN yum install -y MonetDB-lidar-$MonetDBVersion
 
 # Clean up
 RUN yum -y clean all
