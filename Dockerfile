@@ -42,7 +42,7 @@ RUN groupadd -g 5000 monetdb && \
 RUN wget -O /etc/yum.repos.d/monetdb.repo https://dev.monetdb.org/downloads/epel/monetdb.repo
 RUN rpm --import https://dev.monetdb.org/downloads/MonetDB-GPG-KEY
 
-ARG MonetDBVersion=11.23.13
+ARG MonetDBVersion=11.25.5
 
 # Install MonetDB clients
 RUN yum install -y MonetDB-stream-$MonetDBVersion \
@@ -57,7 +57,8 @@ RUN yum install -y MonetDB-$MonetDBVersion \
 # Install MonetDB extensions
 RUN yum install -y MonetDB-geom-MonetDB5-$MonetDBVersion \
                    MonetDB-gsl-MonetDB5-$MonetDBVersion \
-                   MonetDB-R-$MonetDBVersion
+                   MonetDB-R-$MonetDBVersion \
+                   MonetDB-python2-$MonetDBVersion
 
 # RUN yum install -y MonetDB-lidar-$MonetDBVersion
 

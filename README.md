@@ -5,7 +5,9 @@ monetdb-r-docker
 Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb). Based on CentOS 7.
 
 # Supported tags and respective Dockerfile links
-* [`July2015-SP4`, `11.21.19`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.19/Dockerfile)
+* [`Dec2016-SP1`, `11.25.5`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp1/Dockerfile)
+* [`June2016-SP2`, `11.23.13` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/june2016-sp2/Dockerfile)
+* [`July2015-SP4`, `11.21.19` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.19/Dockerfile)
 * [`July2015-SP3`, `11.21.17` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.17/Dockerfile)
 * [`July2015-SP1`, `11.21.11` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.11/Dockerfile)
 * [`July2015`, `11.21.5` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/11.21.5/Dockerfile)
@@ -53,13 +55,15 @@ docker build --rm -t <yourname>/monetdb-r-docker .
 The MonetDB image is based on the CentOS 7. We migrated from Fedora (latest).
 ## Software
 The image includes the latest stable version of the software available for CentOS at build time:
-* MonetDB
+* MonetDB server with hugeint support
 * R module for embedded R support
- * R
+* Python2 module for embedded Python support (since Dec2016 only)
 * GEOS module
 * GSL module
+* Mclient - The native MonetDB client
+* MonetDB ODBC driver
 
-The default database on the image has R integration enabled.
+The default database on the image has R and Python2 integration enabled.
 
 ## Ports
 MonetDB runs on port `50000` by default, which is exposed on the image.
