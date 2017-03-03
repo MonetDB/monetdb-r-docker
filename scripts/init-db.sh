@@ -14,6 +14,7 @@ sleep 5
 if [ ! -d "/var/monetdb5/dbfarm/db" ]; then
     monetdb create db && \
     monetdb set embedr=true db && \
+    monetdb set embedpy=true db && \
     monetdb release db
 else
     echo "Existing database found in '/var/monetdb5/dbfarm/db'"

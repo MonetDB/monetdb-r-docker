@@ -44,7 +44,7 @@ RUN rpm --import http://dev.monetdb.org/downloads/MonetDB-GPG-KEY
 # Update & upgrade
 RUN yum update -y
 
-ARG MonetDBVersion=11.25.5
+ARG MonetDBVersion=11.25.9
 
 # Install MonetDB server
 RUN yum install -y MonetDB-$MonetDBVersion \
