@@ -34,7 +34,7 @@ Or you can run `docker exec -it monetdb-r mclient db` to open an [`mclient`](htt
 Before letting other users access the database-in-container, you should set a new password for the admin user `monetdb`:
 
 ```
-docker exec -d monetdb-r /root/set-monetdb-password.sh <password>
+docker exec -d monetdb-r /home/monetdb/set-monetdb-password.sh <password>
 ```
 
 # Advanced
