@@ -5,12 +5,12 @@ monetdb-r-docker
 Docker container for [MonetDB with R](https://www.monetdb.org/content/embedded-r-monetdb). Based on CentOS 7.
 
 # Supported tags and respective Dockerfile links
-* [`Dec2016-SP5`, `11.25.23`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp5/Dockerfile)
+* [`Jul2017`, `11.27.1`, `latest` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/jul2017/Dockerfile)
+* [`Dec2016-SP5`, `11.25.23`, (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp5/Dockerfile)
 * [`Dec2016-SP4`, `11.25.21`, (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp4/Dockerfile)
 * [`Dec2016-SP3`, `11.25.15`, (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp3/Dockerfile)
 * [`Dec2016-SP2`, `11.25.9`, (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp2/Dockerfile)
 * [`Dec2016-SP1`, `11.25.5` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/dec2016-sp1/Dockerfile)
-* [`June2016-SP2`, `11.23.13` (Dockerfile)](https://github.com/MonetDB/monetdb-r-docker/blob/june2016-sp2/Dockerfile)
 
 # Launching a MonetDB container
 Pull the image from the registry:
