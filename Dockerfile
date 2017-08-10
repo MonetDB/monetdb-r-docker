@@ -38,13 +38,13 @@ RUN groupadd -g 5000 monetdb && \
     useradd -u 5000 -g 5000 monetdb
 
 # Enable MonetDB repo
-RUN yum install -y http://dev.monetdb.org/downloads/epel/MonetDB-release-epel-1.1-1.monetdb.noarch.rpm
-RUN rpm --import http://dev.monetdb.org/downloads/MonetDB-GPG-KEY
+RUN yum install -y https://www.monetdb.org/downloads/epel/MonetDB-release-epel.noarch.rpm
 
 # Update & upgrade
-RUN yum update -y
+RUN yum update -y && \
+    yum upgrade -y
 
-ARG MonetDBVersion=11.27.1
+ARG MonetDBVersion=11.27.5
 
 # Install MonetDB server
 RUN yum install -y MonetDB-$MonetDBVersion \
@@ -57,7 +57,6 @@ RUN yum install -y MonetDB-$MonetDBVersion \
 
 # Install MonetDB extensions
 RUN yum install -y MonetDB-geom-MonetDB5-$MonetDBVersion \
-                   MonetDB-gsl-MonetDB5-$MonetDBVersion \
                    MonetDB-R-$MonetDBVersion \
                    MonetDB-python2-$MonetDBVersion
 
@@ -89,3 +88,4 @@ RUN echo "listenaddr=0.0.0.0" >> /var/monetdb5/dbfarm/.merovingian_properties
 RUN su -c 'sh /home/monetdb/init-db.sh' monetdb
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
