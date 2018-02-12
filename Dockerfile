@@ -44,7 +44,7 @@ RUN yum install -y https://www.monetdb.org/downloads/epel/MonetDB-release-epel.n
 RUN yum update -y && \
     yum upgrade -y
 
-ARG MonetDBVersion=11.27.11
+ARG MonetDBVersion=11.27.13
 
 # Install MonetDB server
 RUN yum install -y MonetDB-$MonetDBVersion \
